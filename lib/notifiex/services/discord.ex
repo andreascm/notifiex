@@ -25,7 +25,9 @@ defmodule Notifiex.Service.Discord do
   def call(payload, options) do
     webhook = Map.get(options, :webhook)
 
-    send_discord(payload, webhook)
+    payload_with_content = Map.put(payload, :content, Map.get(payload, :text))
+
+    send_discord(payload_with_content, webhook)
   end
 
   @spec send_discord(map, binary) :: Notifiex.result()
